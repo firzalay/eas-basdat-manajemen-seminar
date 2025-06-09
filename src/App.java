@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import DAO.UserDAO;
+import model.User;
 
 public class App {
 
@@ -6,7 +8,6 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         int pilih;
         do {
-
             menuUtama();
             pilih = scanner.nextInt();
 
@@ -20,7 +21,6 @@ public class App {
                     break;
 
                 case 3:
-
                     break;
 
                 default:
@@ -32,7 +32,6 @@ public class App {
     }
 
     public static void menuUtama() {
-
         System.out.println("\n=== Sistem Manajemen Seminar ===");
         System.out.println("1. Peserta");
         System.out.println("2. Admin");
@@ -42,30 +41,45 @@ public class App {
 
     public static void menuPeserta(Scanner scanner) {
 
-
         int pilihanPeserta;
+        String email, nama, password;
+        do {
+            System.out.println("\n=== Menu Peserta ===");
+            System.out.println("1. Login");
+            System.out.println("2. Register");
+            System.out.println("3. Kembali");
+            System.out.print("Pilih: ");
+            pilihanPeserta = scanner.nextInt();
 
-        System.out.println("\n=== Menu Peserta ===");
+            switch (pilihanPeserta) {
+                case 1:
+                    System.out.print("Masukkan email: ");
+                    email = scanner.next();
+                    System.out.print("Masukkan password: ");
+                    password = scanner.next();
+                    break;
+                case 2:
+                    System.out.print("Masukkan nama lengkap: ");
+                    scanner.nextLine();
+                    nama = scanner.nextLine();
+                    System.out.print("Masukkan email: ");
+                    email = scanner.next();
+                    System.out.print("Masukkan password: ");
+                    password = scanner.next();
 
-        System.out.println("1. Login");
-        System.out.println("2. Register");
-        System.out.println("3. Kembali");
-        System.out.print("Pilih: ");
-        pilihanPeserta = scanner.nextInt();
+                    User userBaru = new User(nama, email, password, 1);
 
-        switch (pilihanPeserta) {
-            case 1:
-                System.out.println("Test");
-                break;
-            case 2:
-                System.out.println("Test");
-                break;
-            case 3:
-                break;
+                    UserDAO.create(userBaru);
 
-            default:
-                break;
-        }
+                    break;
+                case 3:
+                    break;
+                default:
+                    System.out.println("Pilihan anda tidak valid!");
+                    break;
+            }
+        } while (pilihanPeserta != 3);
+
     }
 
 }
