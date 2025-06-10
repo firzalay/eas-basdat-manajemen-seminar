@@ -57,6 +57,7 @@ public class App {
                     email = scanner.next();
                     System.out.print("Masukkan password: ");
                     password = scanner.next();
+                    UserDAO.validateUserLogin(email, password);
                     break;
                 case 2:
                     System.out.print("Masukkan nama lengkap: ");
