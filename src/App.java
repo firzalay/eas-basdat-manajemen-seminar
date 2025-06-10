@@ -8,7 +8,11 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         int pilih;
         do {
-            menuUtama();
+            System.out.println("\n=== Sistem Manajemen Seminar ===");
+            System.out.println("1. Peserta");
+            System.out.println("2. Admin");
+            System.out.println("3. Exit");
+            System.out.print("Pilih: ");
             pilih = scanner.nextInt();
 
             switch (pilih) {
@@ -29,14 +33,6 @@ public class App {
             }
         } while (pilih != 3);
 
-    }
-
-    public static void menuUtama() {
-        System.out.println("\n=== Sistem Manajemen Seminar ===");
-        System.out.println("1. Peserta");
-        System.out.println("2. Admin");
-        System.out.println("3. Exit");
-        System.out.print("Pilih: ");
     }
 
     public static void menuPeserta(Scanner scanner) {
