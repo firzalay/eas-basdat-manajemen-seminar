@@ -39,6 +39,8 @@ public class App {
 
         int pilihanPeserta;
         String email, nama, password;
+        String emailPattern = "^[a-zA-Z0-9]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z0-9]+$";
+
         do {
             System.out.println("\n=== Menu Peserta ===");
             System.out.println("1. Login");
@@ -51,6 +53,12 @@ public class App {
                 case 1:
                     System.out.print("Masukkan email: ");
                     email = scanner.next();
+
+                    if (!email.matches(emailPattern)) {
+                        System.out.println("Format email salah!");
+                        break;
+                    }
+                    
                     System.out.print("Masukkan password: ");
                     password = scanner.next();
                     UserDAO.validateUserLogin(email, password);
@@ -59,8 +67,15 @@ public class App {
                     System.out.print("Masukkan nama lengkap: ");
                     scanner.nextLine();
                     nama = scanner.nextLine();
+
                     System.out.print("Masukkan email: ");
                     email = scanner.next();
+
+                    if (!email.matches(emailPattern)) {
+                        System.out.println("Format email salah!");
+                        break;
+                    }
+
                     System.out.print("Masukkan password: ");
                     password = scanner.next();
 
