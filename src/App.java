@@ -1,6 +1,11 @@
 import java.util.Scanner;
+
+import DAO.PendaftaranDAO;
+import DAO.SeminarDAO;
 import DAO.UserDAO;
+import model.Seminar;
 import model.User;
+import model.Pendaftaran;
 
 public class App {
 
@@ -58,10 +63,32 @@ public class App {
                         System.out.println("Format email salah!");
                         break;
                     }
-                    
+
                     System.out.print("Masukkan password: ");
                     password = scanner.next();
-                    UserDAO.validateUserLogin(email, password);
+
+                    User loggedInUser = UserDAO.validatedUserLogin(email, password);
+
+                    if (loggedInUser == null) {
+                        System.out.println("Email / Password salah!");
+                    } else {
+                        System.out.println("Login Berhasil!");
+
+                        System.out.println("=== Menu Utama ===");
+                        System.out.println("1. Daftar Seminar");
+                        System.out.println("2. Absensi");
+                        System.out.print("Pilih: ");
+                        pilihanPeserta = scanner.nextInt();
+
+                        if (pilihanPeserta == 1) {
+                            menuListSeminar(scanner, loggedInUser);
+                        } else if (pilihanPeserta == 2) {
+                            System.out.println("Absensi");
+                        } else {
+                            System.out.println("Menu tidak tersedia!");
+                        }
+                    }
+
                     break;
                 case 2:
                     System.out.print("Masukkan nama lengkap: ");
@@ -91,6 +118,37 @@ public class App {
                     break;
             }
         } while (pilihanPeserta != 3);
+
+    }
+
+    public static void menuListSeminar(Scanner scanner, User loggedInUser) {
+        int idSeminar = 0;
+        System.out.println("\n=== List Seminar ===");
+
+        int nomer = 1;
+        String format = "| %-4s | %-6s | %-50s | %-15s |\n";
+        System.out.println("+------+--------+----------------------------------------------------+-----------------+");
+        System.out.printf(format, "No", "ID", "Tema Seminar", "Tanggal");
+        System.out.println("+------+--------+----------------------------------------------------+-----------------+");
+
+        for (Seminar seminar : SeminarDAO.getAllSeminar()) {
+            System.out.printf(format,
+                    nomer,
+                    seminar.getIdSeminar(),
+                    seminar.getTemaSeminar(),
+                    seminar.getTanggal().toString());
+            nomer++;
+        }
+
+        System.out.println("+------+--------+----------------------------------------------------+-----------------+");
+
+        System.out.print("Masukkan ID Seminar: ");
+        idSeminar = scanner.nextInt();
+
+
+        Pendaftaran pendaftaranBaru = new Pendaftaran(loggedInUser.getIdUser(), idSeminar);
+
+        PendaftaranDAO.create(pendaftaranBaru);
 
     }
 
