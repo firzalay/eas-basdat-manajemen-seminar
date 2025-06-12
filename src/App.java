@@ -1,11 +1,15 @@
 import java.util.Scanner;
 
+import DAO.KehadiranDAO;
 import DAO.PendaftaranDAO;
 import DAO.SeminarDAO;
+import DAO.SesiDAO;
 import DAO.UserDAO;
 import model.Seminar;
 import model.User;
+import model.Kehadiran;
 import model.Pendaftaran;
+import model.Sesi;
 
 public class App {
 
@@ -83,7 +87,7 @@ public class App {
                         if (pilihanPeserta == 1) {
                             menuListSeminar(scanner, loggedInUser);
                         } else if (pilihanPeserta == 2) {
-                            System.out.println("Absensi");
+                            menuAbsensi(scanner, loggedInUser);
                         } else {
                             System.out.println("Menu tidak tersedia!");
                         }
@@ -145,10 +149,32 @@ public class App {
         System.out.print("Masukkan ID Seminar: ");
         idSeminar = scanner.nextInt();
 
-
         Pendaftaran pendaftaranBaru = new Pendaftaran(loggedInUser.getIdUser(), idSeminar);
 
         PendaftaranDAO.create(pendaftaranBaru);
+
+    }
+
+    public static void menuAbsensi(Scanner scanner, User loggedInUser) {
+        int idSesi = 0, idUser;
+
+        while (true) {
+            System.out.println("\n=== Menu Absensi === ");
+            System.out.print("Masukkan Kode sesi: ");
+            idSesi = scanner.nextInt();
+
+            Sesi sesi = SesiDAO.getSesiById(idSesi);
+            idUser = loggedInUser.getIdUser();
+
+            if (sesi == null) {
+                System.out.println("ID sesi tidak ditemukan! coba lagi.");
+            } else {
+                Kehadiran catatKehadiran = new Kehadiran(idUser, idSesi);
+                KehadiranDAO.create(catatKehadiran);
+                break;
+            }
+
+        }
 
     }
 
