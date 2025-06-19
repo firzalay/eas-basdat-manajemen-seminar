@@ -240,7 +240,6 @@ public class App {
                                     kelolaSeminar(scanner);
                                     break;
                                 case 2:
-
                                     break;
                                 case 3:
 
@@ -313,7 +312,15 @@ public class App {
                     SeminarDAO.create(seminarBaru);
                     break;
                 case 3:
-
+                    System.out.print("ID seminar yang akan diubah: ");
+                    int idUbah = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Tema baru: ");
+                    String temaBaru = scanner.nextLine();
+                    System.out.print("Tanggal baru (YYYY-MM-DD): ");
+                    String tanggalBaru = scanner.next();
+                    Seminar ubahSeminar = new Seminar(idUbah, temaBaru, Date.valueOf(tanggalBaru));
+                    SeminarDAO.update(ubahSeminar);
                     break;
                 case 4:
 
@@ -325,5 +332,4 @@ public class App {
             }
         } while (pilih != 5);
     }
-
 }

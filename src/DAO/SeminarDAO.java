@@ -47,4 +47,18 @@ public class SeminarDAO {
             e.printStackTrace();
         }
     }
+
+    public static void update(Seminar seminar) {
+        String query = "UPDATE tb_seminar SET tema_seminar = ?, tanggal = ? WHERE id_seminar = ?";
+        try (Connection conn = ConnectionProvider.getCon()) {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, seminar.getTemaSeminar());
+            ps.setDate(2, seminar.getTanggal());
+            ps.setInt(3, seminar.getIdSeminar());
+            ps.executeUpdate();
+            System.out.println("Seminar berhasil diperbarui.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
