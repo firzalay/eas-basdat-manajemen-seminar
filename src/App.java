@@ -1,4 +1,5 @@
 import java.sql.Date;
+import java.sql.Time;
 import java.util.Scanner;
 
 import DAO.KehadiranDAO;
@@ -240,6 +241,7 @@ public class App {
                                     kelolaSeminar(scanner);
                                     break;
                                 case 2:
+                                    kelolaSesi(scanner);
                                     break;
                                 case 3:
 
@@ -331,6 +333,36 @@ public class App {
                     break;
                 default:
                     System.out.println("Pilihan anda tidak valid!");
+            }
+        } while (pilih != 5);
+    }
+
+    public static void kelolaSesi(Scanner scanner) {
+        int pilih;
+        do {
+            System.out.println("\n=== Kelola Sesi ===");
+            System.out.println("1. Lihat Sesi");
+            System.out.println("2. Tambah Sesi");
+            System.out.println("3. Ubah Sesi");
+            System.out.println("4. Hapus Sesi");
+            System.out.println("5. Kembali");
+            System.out.print("Pilih: ");
+            pilih = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (pilih) {
+                case 1:
+                  
+                    break;
+                case 2:
+                  
+                    break;
+                case 3:
+                  
+                    break;
+                case 4:
+                 
+                    break;
             }
         } while (pilih != 5);
     }
