@@ -78,4 +78,21 @@ public class SesiDAO {
             e.printStackTrace();
         }
     }
+
+    public static void update(Sesi sesi) {
+        String query = "UPDATE tb_sesi SET nama_pembicara = ?, judul_sesi = ?, waktu_mulai = ?, waktu_selesai = ?, id_seminar = ? WHERE id_sesi = ?";
+        try (Connection conn = ConnectionProvider.getCon()) {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, sesi.getNamaPembicara());
+            ps.setString(2, sesi.getJudulSesi());
+            ps.setTime(3, sesi.getWaktuMulai());
+            ps.setTime(4, sesi.getWaktuSelesai());
+            ps.setInt(5, sesi.getIdSeminar());
+            ps.setString(6, sesi.getIdSesi());
+            ps.executeUpdate();
+            System.out.println("Sesi berhasil diperbarui.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

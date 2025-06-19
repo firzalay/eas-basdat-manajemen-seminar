@@ -364,7 +364,7 @@ public class App {
                     for (Sesi sesi : SesiDAO.getAllSesi()) {
                         System.out.printf(format,
                                 nomor,
-                                sesi.getIdSesi(), 
+                                sesi.getIdSesi(),
                                 sesi.getNamaPembicara(),
                                 sesi.getJudulSesi(),
                                 sesi.getWaktuMulai().toString(),
@@ -397,7 +397,22 @@ public class App {
                     SesiDAO.create(sesiBaru);
                     break;
                 case 3:
-
+                    System.out.print("ID Sesi yang akan diubah: ");
+                    String idSesiUbah = scanner.next();
+                    scanner.nextLine();
+                    System.out.print("Nama Pembicara baru: ");
+                    String pembicaraBaru = scanner.nextLine();
+                    System.out.print("Judul Sesi baru: ");
+                    String judulBaru = scanner.nextLine();
+                    System.out.print("Waktu Mulai baru (HH:MM:SS): ");
+                    String mulaiBaru = scanner.next();
+                    System.out.print("Waktu Selesai baru (HH:MM:SS): ");
+                    String selesaiBaru = scanner.next();
+                    System.out.print("ID Seminar baru: ");
+                    int idSeminarBaru = scanner.nextInt();
+                    Sesi ubahSesi = new Sesi(idSesiUbah, pembicaraBaru, judulBaru, Time.valueOf(mulaiBaru),
+                            Time.valueOf(selesaiBaru), idSeminarBaru);
+                    SesiDAO.update(ubahSesi);
                     break;
                 case 4:
 
