@@ -215,7 +215,7 @@ public class App {
                     System.out.print("Masukkan password: ");
                     password = scanner.next();
 
-                    User loggedInUser = UserDAO.validatedUserLogin(email, password);
+                    User loggedInUser = UserDAO.validatedAdminLogin(email, password);
 
                     if (loggedInUser == null) {
                         System.out.println("Email / Password salah!");
@@ -255,7 +255,7 @@ public class App {
                                     break;
                             }
 
-                        } while (menuAdminLogin != 3);
+                        } while (menuAdminLogin != 5);
                     }
 
                     break;

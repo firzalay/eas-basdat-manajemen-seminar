@@ -49,4 +49,31 @@ public class UserDAO {
 
         return user;
     }
+
+    public static User validatedAdminLogin(String email, String password) {
+        String query = "SELECT * FROM tb_user WHERE email = ? AND password = ? AND id_role = ? ";
+        User user = null;
+        try (Connection conn = ConnectionProvider.getCon()) {
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ps.setInt(3, 2);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                user = new User(
+                        rs.getInt("id_user"),
+                        rs.getString("nama"),
+                        rs.getString("email"),
+                        rs.getString("password"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
 }
