@@ -1,4 +1,5 @@
 import java.sql.Date;
+import java.sql.Time;
 import java.util.Scanner;
 
 import DAO.KehadiranDAO;
@@ -352,18 +353,18 @@ public class App {
             switch (pilih) {
                 case 1:
                     int nomor = 1;
-                    String format = "| %-3s | %-4s | %-25s | %-55s | %-8s | %-8s | %-10s |\n";
+                    String format = "| %-3s | %-8s | %-25s | %-50s | %-8s | %-8s | %-10s |\n";
 
                     System.out.println(
-                            "+-----+------+---------------------------+---------------------------------------------------------+----------+----------+------------+");
+                            "+-----+----------+---------------------------+----------------------------------------------------+----------+----------+------------+");
                     System.out.printf(format, "No", "ID", "Pembicara", "Judul Sesi", "Mulai", "Selesai", "ID Seminar");
                     System.out.println(
-                            "+-----+------+---------------------------+---------------------------------------------------------+----------+----------+------------+");
+                            "+-----+----------+---------------------------+----------------------------------------------------+----------+----------+------------+");
 
                     for (Sesi sesi : SesiDAO.getAllSesi()) {
                         System.out.printf(format,
                                 nomor,
-                                sesi.getIdSesi(),
+                                sesi.getIdSesi(), 
                                 sesi.getNamaPembicara(),
                                 sesi.getJudulSesi(),
                                 sesi.getWaktuMulai().toString(),
@@ -373,11 +374,27 @@ public class App {
                     }
 
                     System.out.println(
-                            "+-----+------+---------------------------+---------------------------------------------------------+----------+----------+------------+");
+                            "+-----+----------+---------------------------+----------------------------------------------------+----------+----------+------------+");
 
                     break;
                 case 2:
-
+                    System.out.print("Kode Sesi: ");
+                    String kodeSesi = scanner.next();
+                    System.out.print("ID Seminar: ");
+                    int idSeminar = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Nama Pembicara: ");
+                    String pembicara = scanner.nextLine();
+                    System.out.print("Judul Sesi: ");
+                    String judul = scanner.nextLine();
+                    System.out.print("Waktu Mulai (HH:MM:SS): ");
+                    String waktuMulai = scanner.next();
+                    System.out.print("Waktu Selesai (HH:MM:SS): ");
+                    String waktuSelesai = scanner.next();
+                    Sesi sesiBaru = new Sesi(kodeSesi, pembicara, judul, Time.valueOf(waktuMulai),
+                            Time.valueOf(waktuSelesai),
+                            idSeminar);
+                    SesiDAO.create(sesiBaru);
                     break;
                 case 3:
 

@@ -3,7 +3,7 @@ package model;
 import java.sql.Time;
 
 public class Sesi {
-    private int idSesi;
+    private String idSesi;
 
     private String namaPembicara;
     private String judulSesi;
@@ -11,7 +11,7 @@ public class Sesi {
     private Time waktuSelesai;
     private int idSeminar;
 
-    public Sesi(int idSesi, String namaPembicara, String judulSesi, Time waktuMulai, Time waktuSelesai, int idSeminar) {
+    public Sesi(String idSesi, String namaPembicara, String judulSesi, Time waktuMulai, Time waktuSelesai, int idSeminar) {
         this.idSesi = idSesi;
         this.namaPembicara = namaPembicara;
         this.judulSesi = judulSesi;
@@ -20,11 +20,19 @@ public class Sesi {
         this.idSeminar = idSeminar;
     }
 
-    public int getIdSesi() {
+    public Sesi(String namaPembicara, String judulSesi, Time waktuMulai, Time waktuSelesai, int idSeminar) {
+        this.namaPembicara = namaPembicara;
+        this.judulSesi = judulSesi;
+        this.waktuMulai = waktuMulai;
+        this.waktuSelesai = waktuSelesai;
+        this.idSeminar = idSeminar;
+    }
+
+    public String getIdSesi() {
         return idSesi;
     }
 
-    public void setIdSesi(int idSesi) {
+    public void setIdSesi(String idSesi) {
         this.idSesi = idSesi;
     }
 

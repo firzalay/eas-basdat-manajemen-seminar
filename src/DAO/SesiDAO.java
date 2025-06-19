@@ -21,7 +21,7 @@ public class SesiDAO {
 
             if (rs.next()) {
                 sesi = new Sesi(
-                        rs.getInt("id_sesi"),
+                        rs.getString("id_sesi"),
                         rs.getString("nama_pembicara"),
                         rs.getString("judul_sesi"),
                         rs.getTime("waktu_mulai"),
@@ -45,7 +45,7 @@ public class SesiDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("id_sesi");
+                String id = rs.getString("id_sesi");
                 String namaPembicara = rs.getString("nama_pembicara");
                 String judulSesi = rs.getString("judul_sesi");
                 Time waktuMulai = rs.getTime("waktu_mulai");
@@ -60,5 +60,22 @@ public class SesiDAO {
             e.printStackTrace();
         }
         return arrayList;
+    }
+
+    public static void create(Sesi sesi) {
+        String query = "INSERT INTO tb_sesi (id_sesi, nama_pembicara, judul_sesi, waktu_mulai, waktu_selesai, id_seminar) VALUES (?,?, ?, ?, ?, ?)";
+        try (Connection conn = ConnectionProvider.getCon()) {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, sesi.getIdSesi());
+            ps.setString(2, sesi.getNamaPembicara());
+            ps.setString(3, sesi.getJudulSesi());
+            ps.setTime(4, sesi.getWaktuMulai());
+            ps.setTime(5, sesi.getWaktuSelesai());
+            ps.setInt(6, sesi.getIdSeminar());
+            ps.executeUpdate();
+            System.out.println("Sesi berhasil ditambahkan.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
