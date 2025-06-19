@@ -13,6 +13,11 @@ public class Seminar {
         this.tanggal = tanggal;
     }
 
+    public Seminar(String temaSeminar, Date tanggal) {
+        this.temaSeminar = temaSeminar;
+        this.tanggal = tanggal;
+    }
+
     public int getIdSeminar() {
         return idSeminar;
     }

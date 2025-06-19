@@ -1,3 +1,4 @@
+import java.sql.Date;
 import java.util.Scanner;
 
 import DAO.KehadiranDAO;
@@ -236,7 +237,7 @@ public class App {
 
                             switch (pilihanAdmin) {
                                 case 1:
-
+                                    kelolaSeminar(scanner);
                                     break;
                                 case 2:
 
@@ -266,6 +267,43 @@ public class App {
                     break;
             }
         } while (pilihanAdmin != 2);
+    }
+
+    public static void kelolaSeminar(Scanner scanner) {
+        int pilih;
+        do {
+            System.out.println("\n=== Kelola Seminar ===");
+            System.out.println("1. Lihat Seminar");
+            System.out.println("2. Tambah Seminar");
+            System.out.println("3. Ubah Seminar");
+            System.out.println("4. Hapus Seminar");
+            System.out.println("5. Kembali");
+            System.out.print("Pilih: ");
+            pilih = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (pilih) {
+                case 1:
+                    for (Seminar seminar : SeminarDAO.getAllSeminar()) {
+                        System.out.println(seminar);
+                    }
+                    break;
+                case 2:
+                    System.out.print("Tema seminar: ");
+                    String tema = scanner.nextLine();
+                    System.out.print("Tanggal (YYYY-MM-DD): ");
+                    String tgl = scanner.next();
+                    Seminar seminarBaru = new Seminar(tema, Date.valueOf(tgl));
+                    SeminarDAO.create(seminarBaru);
+                    break;
+                case 3:
+                   
+                    break;
+                case 4:
+                    
+                    break;
+            }
+        } while (pilih != 5);
     }
 
 }

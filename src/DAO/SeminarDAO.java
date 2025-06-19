@@ -32,4 +32,19 @@ public class SeminarDAO {
         }
         return arrayList;
     }
+
+    public static void create(Seminar seminar) {
+        String query = "INSERT INTO tb_seminar (tema_seminar, tanggal) VALUES (?, ?)";
+        try (Connection conn = ConnectionProvider.getCon()) {
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, seminar.getTemaSeminar());
+            ps.setDate(2, seminar.getTanggal());
+
+            ps.executeUpdate();
+            System.out.println("Seminar berhasil ditambahkan.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
