@@ -233,9 +233,9 @@ public class App {
                             System.out.println("4. Laporan");
                             System.out.println("5. Kembali");
                             System.out.print("Pilih: ");
-                            pilihanAdmin = scanner.nextInt();
+                            menuAdminLogin = scanner.nextInt();
 
-                            switch (pilihanAdmin) {
+                            switch (menuAdminLogin) {
                                 case 1:
                                     kelolaSeminar(scanner);
                                     break;
@@ -249,7 +249,7 @@ public class App {
 
                                     break;
                                 case 5:
-                                    System.out.println("Kembali ke menu utama.");
+                                    System.out.println("Logout");
                                     break;
                                 default:
                                     System.out.println("Pilihan tidak valid!");
@@ -302,6 +302,10 @@ public class App {
                 case 4:
                     
                     break;
+                case 5:
+                    break;
+                default: 
+                    System.out.println("Pilihan anda tidak valid!");
             }
         } while (pilih != 5);
     }
