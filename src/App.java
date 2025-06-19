@@ -78,19 +78,33 @@ public class App {
                     } else {
                         System.out.println("Login Berhasil!");
 
-                        System.out.println("=== Menu Utama ===");
-                        System.out.println("1. Daftar Seminar");
-                        System.out.println("2. Absensi");
-                        System.out.print("Pilih: ");
-                        pilihanPeserta = scanner.nextInt();
 
-                        if (pilihanPeserta == 1) {
-                            menuListSeminar(scanner, loggedInUser);
-                        } else if (pilihanPeserta == 2) {
-                            menuAbsensi(scanner, loggedInUser);
-                        } else {
-                            System.out.println("Menu tidak tersedia!");
-                        }
+
+                        int menuPesertaLogin = 0;
+
+                        do {
+                            System.out.println("\n=== Menu Utama Peserta ===");
+                            System.out.println("1. Daftar Seminar");
+                            System.out.println("2. Absensi");
+                            System.out.println("3. Logout");
+                            System.out.print("Pilih: ");
+                            menuPesertaLogin = scanner.nextInt();
+
+                            switch (menuPesertaLogin) {
+                                case 1:
+                                    menuListSeminar(scanner, loggedInUser);
+                                    break;
+                                case 2:
+                                    menuAbsensi(scanner, loggedInUser);
+                                    break;
+                                case 3:
+                                    System.out.println("Logout berhasil!");
+                                    break;
+                                default:
+                                    System.out.println("Pilihan tidak tersedia!");
+                                    break;
+                            }
+                        } while (menuPesertaLogin != 3);
                     }
 
                     break;
