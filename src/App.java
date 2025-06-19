@@ -30,7 +30,7 @@ public class App {
                     break;
 
                 case 2:
-
+                    menuAdmin(scanner);
                     break;
 
                 case 3:
@@ -77,8 +77,6 @@ public class App {
                         System.out.println("Email / Password salah!");
                     } else {
                         System.out.println("Login Berhasil!");
-
-
 
                         int menuPesertaLogin = 0;
 
@@ -190,6 +188,84 @@ public class App {
 
         }
 
+    }
+
+    public static void menuAdmin(Scanner scanner) {
+        int pilihanAdmin;
+        String email, password;
+        String emailPattern = "^[a-zA-Z0-9]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z0-9]+$";
+
+        do {
+            System.out.println("\n=== Menu Admin ===");
+            System.out.println("1. Login");
+            System.out.println("2. Kembali");
+            System.out.print("Pilih: ");
+            pilihanAdmin = scanner.nextInt();
+
+            switch (pilihanAdmin) {
+                case 1:
+                    System.out.print("Masukkan email: ");
+                    email = scanner.next();
+
+                    if (!email.matches(emailPattern)) {
+                        System.out.println("Format email salah!");
+                        break;
+                    }
+
+                    System.out.print("Masukkan password: ");
+                    password = scanner.next();
+
+                    User loggedInUser = UserDAO.validatedUserLogin(email, password);
+
+                    if (loggedInUser == null) {
+                        System.out.println("Email / Password salah!");
+                    } else {
+                        System.out.println("Login Admin Berhasil!");
+
+                        int menuAdminLogin = 0;
+
+                        do {
+                            System.out.println("\n=== Menu Admin ===");
+                            System.out.println("1. Kelola Seminar");
+                            System.out.println("2. Kelola Sesi");
+                            System.out.println("3. Cetak Sertifikat");
+                            System.out.println("4. Laporan");
+                            System.out.println("5. Kembali");
+                            System.out.print("Pilih: ");
+                            pilihanAdmin = scanner.nextInt();
+
+                            switch (pilihanAdmin) {
+                                case 1:
+
+                                    break;
+                                case 2:
+
+                                    break;
+                                case 3:
+
+                                    break;
+                                case 4:
+
+                                    break;
+                                case 5:
+                                    System.out.println("Kembali ke menu utama.");
+                                    break;
+                                default:
+                                    System.out.println("Pilihan tidak valid!");
+                                    break;
+                            }
+
+                        } while (menuAdminLogin != 3);
+                    }
+
+                    break;
+                case 2:
+                    break;
+                default:
+                    System.out.println("Pilihan anda tidak valid!");
+                    break;
+            }
+        } while (pilihanAdmin != 2);
     }
 
 }
