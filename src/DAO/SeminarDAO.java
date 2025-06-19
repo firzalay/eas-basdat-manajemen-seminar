@@ -61,4 +61,16 @@ public class SeminarDAO {
             e.printStackTrace();
         }
     }
+
+     public static void delete(int idSeminar) {
+        String query = "DELETE FROM tb_seminar WHERE id_seminar = ?";
+        try (Connection conn = ConnectionProvider.getCon()) {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, idSeminar);
+            ps.executeUpdate();
+            System.out.println("Seminar berhasil dihapus.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

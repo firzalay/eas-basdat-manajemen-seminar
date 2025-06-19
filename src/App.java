@@ -323,7 +323,9 @@ public class App {
                     SeminarDAO.update(ubahSeminar);
                     break;
                 case 4:
-
+                    System.out.print("ID seminar yang akan dihapus: ");
+                    int idHapus = scanner.nextInt();
+                    SeminarDAO.delete(idHapus);
                     break;
                 case 5:
                     break;
