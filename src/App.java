@@ -284,9 +284,25 @@ public class App {
 
             switch (pilih) {
                 case 1:
+                    int nomer = 1;
+                    String format = "| %-4s | %-6s | %-50s | %-15s |\n";
+                    System.out.println(
+                            "+------+--------+----------------------------------------------------+-----------------+");
+                    System.out.printf(format, "No", "ID", "Tema Seminar", "Tanggal");
+                    System.out.println(
+                            "+------+--------+----------------------------------------------------+-----------------+");
+
                     for (Seminar seminar : SeminarDAO.getAllSeminar()) {
-                        System.out.println(seminar);
+                        System.out.printf(format,
+                                nomer,
+                                seminar.getIdSeminar(),
+                                seminar.getTemaSeminar(),
+                                seminar.getTanggal().toString());
+                        nomer++;
                     }
+
+                    System.out.println(
+                            "+------+--------+----------------------------------------------------+-----------------+");
                     break;
                 case 2:
                     System.out.print("Tema seminar: ");
@@ -297,14 +313,14 @@ public class App {
                     SeminarDAO.create(seminarBaru);
                     break;
                 case 3:
-                   
+
                     break;
                 case 4:
-                    
+
                     break;
                 case 5:
                     break;
-                default: 
+                default:
                     System.out.println("Pilihan anda tidak valid!");
             }
         } while (pilih != 5);
