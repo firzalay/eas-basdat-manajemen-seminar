@@ -415,7 +415,9 @@ public class App {
                     SesiDAO.update(ubahSesi);
                     break;
                 case 4:
-
+                    System.out.print("ID sesi yang akan dihapus: ");
+                    String idSesiHapus = scanner.next();
+                    SesiDAO.delete(idSesiHapus);
                     break;
             }
         } while (pilih != 5);

@@ -95,4 +95,16 @@ public class SesiDAO {
             e.printStackTrace();
         }
     }
+
+    public static void delete(String idSesi) {
+        String query = "DELETE FROM tb_sesi WHERE id_sesi = ?";
+        try (Connection conn = ConnectionProvider.getCon()) {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, idSesi);
+            ps.executeUpdate();
+            System.out.println("Sesi berhasil dihapus.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
