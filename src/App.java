@@ -1,5 +1,4 @@
 import java.sql.Date;
-import java.sql.Time;
 import java.util.Scanner;
 
 import DAO.KehadiranDAO;
@@ -352,16 +351,39 @@ public class App {
 
             switch (pilih) {
                 case 1:
-                  
+                    int nomor = 1;
+                    String format = "| %-3s | %-4s | %-25s | %-55s | %-8s | %-8s | %-10s |\n";
+
+                    System.out.println(
+                            "+-----+------+---------------------------+---------------------------------------------------------+----------+----------+------------+");
+                    System.out.printf(format, "No", "ID", "Pembicara", "Judul Sesi", "Mulai", "Selesai", "ID Seminar");
+                    System.out.println(
+                            "+-----+------+---------------------------+---------------------------------------------------------+----------+----------+------------+");
+
+                    for (Sesi sesi : SesiDAO.getAllSesi()) {
+                        System.out.printf(format,
+                                nomor,
+                                sesi.getIdSesi(),
+                                sesi.getNamaPembicara(),
+                                sesi.getJudulSesi(),
+                                sesi.getWaktuMulai().toString(),
+                                sesi.getWaktuSelesai().toString(),
+                                sesi.getIdSeminar());
+                        nomor++;
+                    }
+
+                    System.out.println(
+                            "+-----+------+---------------------------+---------------------------------------------------------+----------+----------+------------+");
+
                     break;
                 case 2:
-                  
+
                     break;
                 case 3:
-                  
+
                     break;
                 case 4:
-                 
+
                     break;
             }
         } while (pilih != 5);
