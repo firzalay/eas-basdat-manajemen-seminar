@@ -1,8 +1,10 @@
 package DAO;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import model.User;
 
@@ -75,5 +77,16 @@ public class UserDAO {
         }
 
         return user;
+    }
+
+    public static void callCetakSertifikat(int userId, int seminarId) {
+        try (Connection conn = ConnectionProvider.getCon()) {
+            CallableStatement stmt = conn.prepareCall("{CALL generate_sertifikat(?, ?)}");
+            stmt.setInt(1, userId);
+            stmt.setInt(2, seminarId);
+            stmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -244,7 +244,7 @@ public class App {
                                     kelolaSesi(scanner);
                                     break;
                                 case 3:
-
+                                    cetakSertifikat(scanner);
                                     break;
                                 case 4:
 
@@ -421,5 +421,17 @@ public class App {
                     break;
             }
         } while (pilih != 5);
+    }
+
+    public static void cetakSertifikat(Scanner scanner) {
+        System.out.print("Masukkan ID User: ");
+        int idUser = scanner.nextInt();
+        System.out.print("Masukkan ID Seminar: ");
+        int idSeminar = scanner.nextInt();
+
+        
+        UserDAO.callCetakSertifikat(idUser, idSeminar); 
+
+        System.out.println("Cetak sertifikat selesai jika user lulus.");
     }
 }
