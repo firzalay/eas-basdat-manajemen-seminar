@@ -62,7 +62,7 @@ public class SeminarDAO {
         }
     }
 
-     public static void delete(int idSeminar) {
+    public static void delete(int idSeminar) {
         String query = "DELETE FROM tb_seminar WHERE id_seminar = ?";
         try (Connection conn = ConnectionProvider.getCon()) {
             PreparedStatement ps = conn.prepareStatement(query);
@@ -73,4 +73,40 @@ public class SeminarDAO {
             e.printStackTrace();
         }
     }
+
+    public static void laporanJumlahPesertaPerSeminar() {
+        String query = """
+                    SELECT
+                        s.tema_seminar,
+                        COUNT(CASE WHEN p.status_kelulusan = 'lulus' THEN 1 END) AS lulus,
+                        COUNT(CASE WHEN p.status_kelulusan = 'tidak lulus' THEN 1 END) AS tidak_lulus
+                    FROM
+                        tb_pendaftaran p
+                    JOIN
+                        tb_seminar s ON p.id_seminar = s.id_seminar
+                    GROUP BY
+                        s.id_seminar
+                """;
+
+        try (Connection conn = ConnectionProvider.getCon();
+                PreparedStatement ps = conn.prepareStatement(query);
+                ResultSet rs = ps.executeQuery()) {
+
+            System.out.println("\n=== Laporan Status Kelulusan per Seminar ===");
+            System.out.printf("| %-40s | %-10s | %-13s |\n", "Tema Seminar", "Lulus", "Tidak Lulus");
+            System.out.println("--------------------------------------------------------------------------");
+
+            while (rs.next()) {
+                String tema = rs.getString("tema_seminar");
+                int lulus = rs.getInt("lulus");
+                int tidakLulus = rs.getInt("tidak_lulus");
+
+                System.out.printf("| %-40s | %-10d | %-13d |\n", tema, lulus, tidakLulus);
+            }
+            System.out.println();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

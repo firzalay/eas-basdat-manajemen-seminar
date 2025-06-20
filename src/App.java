@@ -247,7 +247,7 @@ public class App {
                                     cetakSertifikat(scanner);
                                     break;
                                 case 4:
-
+                                    laporanAdmin(scanner);
                                     break;
                                 case 5:
                                     System.out.println("Logout");
@@ -434,4 +434,38 @@ public class App {
 
         System.out.println("Cetak sertifikat selesai jika user lulus.");
     }
+
+    public static void laporanAdmin(Scanner scanner) {
+        int pilihanLaporanAdmin = 0;
+
+        System.out.println("\n=== Laporan Admin ===");
+
+        do {
+            System.out.println("1. Jumlah kelulusan per seminar");
+            System.out.println("2. Peserta yang ikut > 1 seminar");
+            System.out.println("3. Peserta yang belum pernah lulus");
+            System.out.println("4. Kembali");
+            System.out.print("Pilih: ");
+            pilihanLaporanAdmin = scanner.nextInt();
+
+            switch (pilihanLaporanAdmin) {
+                case 1:
+                    SeminarDAO.laporanJumlahPesertaPerSeminar();
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                default:
+                    System.out.println("Pilihan anda tidak valid!");
+                    break;
+            }
+
+        } while (pilihanLaporanAdmin != 4);
+
+    }
+
 }
