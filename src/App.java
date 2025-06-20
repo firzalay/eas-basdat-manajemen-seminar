@@ -442,7 +442,7 @@ public class App {
 
         do {
             System.out.println("1. Jumlah kelulusan per seminar");
-            System.out.println("2. Peserta yang ikut > 1 seminar");
+            System.out.println("2. Jumlah seminar yang diikuti > 3 peserta");
             System.out.println("3. Peserta yang belum pernah lulus");
             System.out.println("4. Kembali");
             System.out.print("Pilih: ");
@@ -453,7 +453,7 @@ public class App {
                     SeminarDAO.laporanJumlahPesertaPerSeminar();
                     break;
                 case 2:
-
+                    SeminarDAO.laporanSeminarPopuler();
                     break;
                 case 3:
                     break;
