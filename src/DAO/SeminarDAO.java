@@ -140,4 +140,38 @@ public class SeminarDAO {
         }
     }
 
+    public static void laporanUserBelumLulus() {
+        String query = """
+                    SELECT *
+                    FROM tb_user
+                    WHERE id_user NOT IN (
+                        SELECT DISTINCT id_user
+                        FROM tb_pendaftaran
+                        WHERE status_kelulusan = 'lulus'
+                    )
+                """;
+
+        try (Connection conn = ConnectionProvider.getCon();
+                PreparedStatement ps = conn.prepareStatement(query);
+                ResultSet rs = ps.executeQuery()) {
+
+            System.out.println("\n=== Daftar User yang Belum Pernah Lulus ===");
+            System.out.printf("| %-4s | %-25s | %-30s |\n", "ID", "Nama", "Email");
+            System.out.println("---------------------------------------------------------------------");
+
+            while (rs.next()) {
+                int id = rs.getInt("id_user");
+                String nama = rs.getString("nama");
+                String email = rs.getString("email");
+
+                System.out.printf("| %-4d | %-25s | %-30s |\n", id, nama, email);
+            }
+
+            System.out.println();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

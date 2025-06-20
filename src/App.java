@@ -456,6 +456,7 @@ public class App {
                     SeminarDAO.laporanSeminarPopuler();
                     break;
                 case 3:
+                    SeminarDAO.laporanUserBelumLulus();
                     break;
                 case 4:
                     break;
