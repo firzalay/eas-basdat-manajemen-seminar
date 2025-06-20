@@ -444,7 +444,8 @@ public class App {
             System.out.println("1. Jumlah kelulusan per seminar");
             System.out.println("2. Jumlah seminar yang diikuti > 3 peserta");
             System.out.println("3. Peserta yang belum pernah lulus");
-            System.out.println("4. Kembali");
+            System.out.println("4. Peserta Lulus & Mendapatkan Sertifikat");
+            System.out.println("5. Kembali");
             System.out.print("Pilih: ");
             pilihanLaporanAdmin = scanner.nextInt();
 
@@ -459,13 +460,16 @@ public class App {
                     SeminarDAO.laporanUserBelumLulus();
                     break;
                 case 4:
+                    SeminarDAO.laporanKelulusanDanSertifikat();
+                    break;
+                case 5:
                     break;
                 default:
                     System.out.println("Pilihan anda tidak valid!");
                     break;
             }
 
-        } while (pilihanLaporanAdmin != 4);
+        } while (pilihanLaporanAdmin != 5);
 
     }
 

@@ -174,4 +174,57 @@ public class SeminarDAO {
         }
     }
 
+    public static void laporanKelulusanDanSertifikat() {
+        String query = """
+                    WITH peserta_lulus AS (
+                        SELECT id_user, id_seminar
+                        FROM tb_pendaftaran
+                        WHERE status_kelulusan = 'lulus'
+                    )
+                    SELECT
+                        pl.id_user,
+                        u.nama,
+                        pl.id_seminar,
+                        s.tema_seminar,
+                        IF(c.id_user IS NOT NULL, 'Ya', 'Belum') AS sudah_dapat_sertifikat
+                    FROM
+                        peserta_lulus pl
+                    JOIN
+                        tb_user u ON pl.id_user = u.id_user
+                    JOIN
+                        tb_seminar s ON pl.id_seminar = s.id_seminar
+                    LEFT JOIN
+                        tb_sertifikat c ON pl.id_user = c.id_user AND pl.id_seminar = c.id_seminar
+                """;
+
+        try (Connection conn = ConnectionProvider.getCon();
+                PreparedStatement ps = conn.prepareStatement(query);
+                ResultSet rs = ps.executeQuery()) {
+
+            System.out.println("\n=== Laporan Peserta Lulus & Sertifikat ===");
+
+            String format = "| %-4s | %-30s | %-7s | %-40s | %-10s |\n";
+            System.out.println(
+                    "-----------------------------------------------------------------------------------------------");
+            System.out.printf(format, "ID", "Nama", "Seminar", "Tema Seminar", "Sertifikat");
+            System.out.println(
+                    "-----------------------------------------------------------------------------------------------");
+
+            while (rs.next()) {
+                System.out.printf(format,
+                        rs.getInt("id_user"),
+                        rs.getString("nama"),
+                        rs.getInt("id_seminar"),
+                        rs.getString("tema_seminar"),
+                        rs.getString("sudah_dapat_sertifikat"));
+            }
+
+            System.out.println(
+                    "-----------------------------------------------------------------------------------------------");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
